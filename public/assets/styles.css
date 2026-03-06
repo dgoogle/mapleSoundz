@@ -3,12 +3,12 @@
   --bg-shadow: #2d1b11;
   --panel: rgba(28, 16, 10, 0.78);
   --panel-strong: rgba(43, 25, 16, 0.92);
-  --panel-border: rgba(245, 198, 111, 0.26);
+  --panel-border: rgba(173, 213, 145, 0.24);
   --text: #fff3db;
   --muted: #d8b98a;
-  --gold: #f3bf63;
-  --gold-bright: #ffd88f;
-  --accent: #b55c2c;
+  --gold: #98bf7a;
+  --gold-bright: #bfdca8;
+  --accent: #6f9257;
   --shadow: rgba(0, 0, 0, 0.45);
 }
 
@@ -57,10 +57,10 @@ body::before {
   width: 100%;
   padding: 18px;
   text-align: left;
-  border: 1px solid rgba(243, 191, 99, 0.18);
+  border: 1px solid rgba(152, 191, 122, 0.18);
   border-radius: 22px;
   background:
-    linear-gradient(180deg, rgba(255, 216, 143, 0.06), transparent 38%),
+    linear-gradient(180deg, rgba(191, 220, 168, 0.05), transparent 38%),
     linear-gradient(180deg, rgba(52, 30, 19, 0.24), rgba(24, 14, 9, 0.16));
   color: var(--text);
   cursor: pointer;
@@ -71,16 +71,16 @@ body::before {
 
 .sound-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(255, 216, 143, 0.52);
+  border-color: rgba(191, 220, 168, 0.4);
   box-shadow: 0 24px 48px rgba(0, 0, 0, 0.34);
   background:
-    linear-gradient(180deg, rgba(255, 216, 143, 0.1), transparent 42%),
-    linear-gradient(180deg, rgba(68, 39, 24, 0.3), rgba(28, 16, 10, 0.2));
+    linear-gradient(180deg, rgba(191, 220, 168, 0.08), transparent 42%),
+    linear-gradient(180deg, rgba(57, 73, 43, 0.22), rgba(28, 16, 10, 0.2));
 }
 
 .sound-card.is-playing {
-  border-color: rgba(243, 191, 99, 0.7);
-  box-shadow: 0 0 0 1px rgba(243, 191, 99, 0.22), 0 24px 40px rgba(0, 0, 0, 0.32);
+  border-color: rgba(152, 191, 122, 0.56);
+  box-shadow: 0 0 0 1px rgba(152, 191, 122, 0.18), 0 24px 40px rgba(0, 0, 0, 0.32);
 }
 
 .card-art-wrap {
@@ -91,8 +91,8 @@ body::before {
   padding: 16px;
   border-radius: 18px;
   background:
-    radial-gradient(circle at center, rgba(255, 216, 143, 0.08), transparent 52%),
-    linear-gradient(180deg, rgba(92, 52, 30, 0.18), rgba(31, 18, 11, 0.1));
+    radial-gradient(circle at center, rgba(191, 220, 168, 0.08), transparent 52%),
+    linear-gradient(180deg, rgba(63, 85, 50, 0.16), rgba(31, 18, 11, 0.1));
   backdrop-filter: blur(12px);
   overflow: hidden;
 }
@@ -102,7 +102,7 @@ body::before {
   inset: auto 20% 12px;
   height: 24px;
   border-radius: 999px;
-  background: rgba(255, 183, 88, 0.34);
+  background: rgba(152, 191, 122, 0.24);
   filter: blur(16px);
 }
 
@@ -126,8 +126,8 @@ body::before {
 
 .sound-card.is-playing .card-art-wrap {
   background:
-    radial-gradient(circle at center, rgba(255, 216, 143, 0.16), transparent 52%),
-    linear-gradient(180deg, rgba(118, 67, 38, 0.28), rgba(40, 23, 14, 0.16));
+    radial-gradient(circle at center, rgba(191, 220, 168, 0.14), transparent 52%),
+    linear-gradient(180deg, rgba(88, 118, 67, 0.24), rgba(40, 23, 14, 0.16));
 }
 
 .sound-card:focus-visible {
