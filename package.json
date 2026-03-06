@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "build:single": "node scripts/build-single-html.js",
     "start": "node server.js"
   }
 }
