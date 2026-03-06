@@ -1,0 +1,147 @@
+:root {
+  --bg-ink: #160e09;
+  --bg-shadow: #2d1b11;
+  --panel: rgba(28, 16, 10, 0.78);
+  --panel-strong: rgba(43, 25, 16, 0.92);
+  --panel-border: rgba(245, 198, 111, 0.26);
+  --text: #fff3db;
+  --muted: #d8b98a;
+  --gold: #f3bf63;
+  --gold-bright: #ffd88f;
+  --accent: #b55c2c;
+  --shadow: rgba(0, 0, 0, 0.45);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--text);
+  background:
+    linear-gradient(180deg, rgba(11, 6, 4, 0.18), rgba(11, 6, 4, 0.74)),
+    radial-gradient(circle at top, rgba(255, 218, 144, 0.18), transparent 38%),
+    url("/assets/background-art.jpg") center / cover fixed no-repeat,
+    linear-gradient(180deg, var(--bg-ink), var(--bg-shadow));
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(9, 5, 3, 0.5), rgba(9, 5, 3, 0.68)),
+    radial-gradient(circle at center, rgba(255, 203, 111, 0.08), transparent 60%);
+  pointer-events: none;
+}
+
+.page-shell {
+  width: min(1180px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 28px 0 56px;
+}
+
+.soundboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.sound-card {
+  position: relative;
+  display: grid;
+  gap: 16px;
+  width: 100%;
+  padding: 18px;
+  text-align: left;
+  border: 1px solid rgba(243, 191, 99, 0.18);
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(255, 216, 143, 0.06), transparent 38%),
+    linear-gradient(180deg, rgba(52, 30, 19, 0.24), rgba(24, 14, 9, 0.16));
+  color: var(--text);
+  cursor: pointer;
+  box-shadow: 0 20px 42px rgba(0, 0, 0, 0.26);
+  backdrop-filter: blur(5px);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.sound-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 216, 143, 0.52);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.34);
+  background:
+    linear-gradient(180deg, rgba(255, 216, 143, 0.1), transparent 42%),
+    linear-gradient(180deg, rgba(68, 39, 24, 0.3), rgba(28, 16, 10, 0.2));
+}
+
+.sound-card.is-playing {
+  border-color: rgba(243, 191, 99, 0.7);
+  box-shadow: 0 0 0 1px rgba(243, 191, 99, 0.22), 0 24px 40px rgba(0, 0, 0, 0.32);
+}
+
+.card-art-wrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 160px;
+  padding: 16px;
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at center, rgba(255, 216, 143, 0.08), transparent 52%),
+    linear-gradient(180deg, rgba(92, 52, 30, 0.18), rgba(31, 18, 11, 0.1));
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+}
+
+.card-glow {
+  position: absolute;
+  inset: auto 20% 12px;
+  height: 24px;
+  border-radius: 999px;
+  background: rgba(255, 183, 88, 0.34);
+  filter: blur(16px);
+}
+
+.card-art {
+  position: relative;
+  max-width: 100%;
+  max-height: 128px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.35;
+  text-align: center;
+  word-break: break-word;
+  color: var(--text);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
+}
+
+.sound-card.is-playing .card-art-wrap {
+  background:
+    radial-gradient(circle at center, rgba(255, 216, 143, 0.16), transparent 52%),
+    linear-gradient(180deg, rgba(118, 67, 38, 0.28), rgba(40, 23, 14, 0.16));
+}
+
+.sound-card:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 3px;
+}
+
+@media (max-width: 560px) {
+  .page-shell {
+    width: min(100vw - 20px, 1180px);
+    padding-top: 20px;
+  }
+
+  .sound-card {
+    border-radius: 20px;
+  }
+}

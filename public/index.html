@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MapleSoundz</title>
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <main id="app" class="soundboard"></main>
+    </div>
+
+    <template id="card-template">
+      <button class="sound-card" type="button">
+        <div class="card-art-wrap">
+          <div class="card-glow"></div>
+          <img class="card-art" alt="" />
+        </div>
+        <p class="card-title"></p>
+        <audio preload="none"></audio>
+      </button>
+    </template>
+
+    <script src="/assets/app.js" defer></script>
+  </body>
+</html>
