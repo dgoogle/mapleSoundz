@@ -110,11 +110,41 @@ function escapeScript(text) {
   return text.replace(/<\/script/gi, '<\\/script');
 }
 
-const backgroundDataUri = toDataUri('public/assets/background-art.jpg');
-const css = readFile('public/assets/styles.css').replace(
-  'url("/assets/background-art.jpg")',
-  `url("${backgroundDataUri}")`
+function escapeJsonForHtml(value) {
+  return JSON.stringify(value)
+    .replace(/</g, '\\u003c')
+    .replace(/>/g, '\\u003e')
+    .replace(/&/g, '\\u0026');
+}
+
+let css = readFile('public/assets/styles.css');
+css = css.replace(
+  '    url("/assets/background-art.jpg") center / cover fixed no-repeat,\n    linear-gradient(180deg, var(--bg-ink), var(--bg-shadow));',
+  '    linear-gradient(180deg, var(--bg-ink), var(--bg-shadow));'
 );
+css = css.replace(
+  '      url("/assets/background-art.jpg") center top / cover no-repeat,\n      linear-gradient(180deg, var(--bg-ink), var(--bg-shadow));',
+  '      linear-gradient(180deg, var(--bg-ink), var(--bg-shadow));'
+);
+css = `${css}
+
+.page-shell::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at top, rgba(255, 218, 144, 0.08), transparent 30%),
+    radial-gradient(circle at 20% 20%, rgba(191, 220, 168, 0.08), transparent 24%),
+    linear-gradient(180deg, rgba(17, 10, 6, 0.2), rgba(17, 10, 6, 0.56));
+  pointer-events: none;
+  z-index: -1;
+}
+
+.sound-card,
+.card-art-wrap {
+  backdrop-filter: none;
+}
+`;
 
 const embeddedTracks = tracks.map((track) => ({
   basename: track.basename,
@@ -123,7 +153,7 @@ const embeddedTracks = tracks.map((track) => ({
 }));
 
 const appJs = `
-const tracks = ${JSON.stringify(embeddedTracks)};
+const tracks = JSON.parse(document.querySelector('#tracks-data').textContent);
 
 const root = document.querySelector('#app');
 const cardTemplate = document.querySelector('#card-template');
@@ -172,9 +202,15 @@ function createTrackCard(track) {
   image.src = track.art;
   image.alt = track.basename;
   title.textContent = track.basename.replace(/\\.mp3$/i, '');
-  audio.src = track.audio;
 
-  card.addEventListener('click', () => handlePlay(audio, card));
+  card.addEventListener('click', () => {
+    if (!audio.src) {
+      audio.src = track.audio;
+      audio.load();
+    }
+
+    handlePlay(audio, card);
+  });
   audio.addEventListener('ended', () => {
     if (activeAudio === audio) {
       stopActivePlayback();
@@ -193,7 +229,9 @@ const html = `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#160e09" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
     <title>MapleSoundz</title>
     <style>
 ${css}
@@ -214,6 +252,10 @@ ${css}
         <audio preload="none"></audio>
       </button>
     </template>
+
+    <script id="tracks-data" type="application/json">
+${escapeJsonForHtml(embeddedTracks)}
+    </script>
 
     <script>
 ${escapeScript(appJs)}

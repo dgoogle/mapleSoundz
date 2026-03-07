@@ -10,15 +10,21 @@
   --gold-bright: #bfdca8;
   --accent: #6f9257;
   --shadow: rgba(0, 0, 0, 0.45);
+  --page-gutter: 16px;
 }
 
 * {
   box-sizing: border-box;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
+  min-height: 100svh;
   font-family: Georgia, "Times New Roman", serif;
   color: var(--text);
   background:
@@ -39,9 +45,13 @@ body::before {
 }
 
 .page-shell {
-  width: min(1180px, calc(100vw - 32px));
+  width: min(1180px, calc(100vw - (var(--page-gutter) * 2)));
   margin: 0 auto;
-  padding: 28px 0 56px;
+  padding:
+    max(20px, env(safe-area-inset-top))
+    0
+    max(28px, env(safe-area-inset-bottom))
+    0;
 }
 
 .soundboard {
@@ -64,6 +74,8 @@ body::before {
     linear-gradient(180deg, rgba(52, 30, 19, 0.24), rgba(24, 14, 9, 0.16));
   color: var(--text);
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
   box-shadow: 0 20px 42px rgba(0, 0, 0, 0.26);
   backdrop-filter: blur(5px);
   transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
@@ -135,13 +147,70 @@ body::before {
   outline-offset: 3px;
 }
 
-@media (max-width: 560px) {
-  .page-shell {
-    width: min(100vw - 20px, 1180px);
-    padding-top: 20px;
+@media (hover: none) {
+  .sound-card:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --page-gutter: 12px;
+  }
+
+  body {
+    background:
+      linear-gradient(180deg, rgba(11, 6, 4, 0.18), rgba(11, 6, 4, 0.74)),
+      radial-gradient(circle at top, rgba(255, 218, 144, 0.18), transparent 38%),
+      url("/assets/background-art.jpg") center top / cover no-repeat,
+      linear-gradient(180deg, var(--bg-ink), var(--bg-shadow));
+  }
+
+  .soundboard {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
   }
 
   .sound-card {
-    border-radius: 20px;
+    gap: 12px;
+    min-height: 224px;
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .card-art-wrap {
+    min-height: 118px;
+    padding: 12px;
+    border-radius: 14px;
+  }
+
+  .card-art {
+    max-height: 92px;
+  }
+
+  .card-title {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .page-shell {
+    padding-top: max(16px, env(safe-area-inset-top));
+  }
+
+  .soundboard {
+    grid-template-columns: 1fr;
+  }
+
+  .sound-card {
+    min-height: 0;
+  }
+
+  .card-art-wrap {
+    min-height: 132px;
+  }
+
+  .card-art {
+    max-height: 108px;
   }
 }
