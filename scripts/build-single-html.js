@@ -118,13 +118,14 @@ function escapeJsonForHtml(value) {
 }
 
 let css = readFile('public/assets/styles.css');
+const backgroundArt = toDataUri('public/assets/background-art.jpg');
 css = css.replace(
   '    url("/assets/background-art.jpg") center / cover fixed no-repeat,\n    linear-gradient(180deg, var(--bg-ink), var(--bg-shadow));',
-  '    linear-gradient(180deg, var(--bg-ink), var(--bg-shadow));'
+  `    url("${backgroundArt}") center / cover fixed no-repeat,\n    linear-gradient(180deg, var(--bg-ink), var(--bg-shadow));`
 );
 css = css.replace(
   '      url("/assets/background-art.jpg") center top / cover no-repeat,\n      linear-gradient(180deg, var(--bg-ink), var(--bg-shadow));',
-  '      linear-gradient(180deg, var(--bg-ink), var(--bg-shadow));'
+  `      url("${backgroundArt}") center top / cover no-repeat,\n      linear-gradient(180deg, var(--bg-ink), var(--bg-shadow));`
 );
 css = `${css}
 
