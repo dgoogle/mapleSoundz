@@ -17,6 +17,10 @@ const routes = [
     prefix: '/assets/',
     dir: path.join(root, 'public/assets'),
   },
+  {
+    prefix: '/',
+    dir: path.join(root, 'public'),
+  },
 ];
 
 const contentTypes = {
@@ -29,6 +33,8 @@ const contentTypes = {
   '.mp3': 'audio/mpeg',
   '.png': 'image/png',
   '.svg': 'image/svg+xml',
+  '.txt': 'text/plain; charset=utf-8',
+  '.webmanifest': 'application/manifest+json; charset=utf-8',
 };
 
 function sendFile(filePath, res) {
@@ -47,7 +53,8 @@ function resolveRoutePath(urlPath) {
     }
 
     const relPath = decodeURIComponent(urlPath.slice(route.prefix.length));
-    const candidate = path.normalize(path.join(route.dir, relPath));
+    const safeRelPath = relPath || 'index.html';
+    const candidate = path.normalize(path.join(route.dir, safeRelPath));
 
     if (!candidate.startsWith(route.dir)) {
       return null;

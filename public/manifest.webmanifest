@@ -1,0 +1,21 @@
+{
+  "name": "MapleSoundz",
+  "short_name": "MapleSoundz",
+  "description": "A MapleStory-inspired browser soundboard with classic UI and event audio clips.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#160e09",
+  "theme_color": "#160e09",
+  "icons": [
+    {
+      "src": "/assets/game-art/title.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/game-art/title.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

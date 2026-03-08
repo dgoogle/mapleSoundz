@@ -1,6 +1,12 @@
 {
+  "name": "maplesoundz",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A MapleStory-inspired browser soundboard.",
   "scripts": {
-    "build:single": "node scripts/build-single-html.js",
-    "start": "node server.js"
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "npm run build:single",
+    "build:single": "node scripts/build-single-html.js"
   }
 }
